@@ -1,0 +1,13 @@
+{
+  "name": "nfc",
+  "version": "0.0.1",
+  "main": "nfc.mjs",
+  "author": "Gwyn Morfey <mail@gwynmorfey.com>",
+  "license": "MIT",
+  "dependencies": {
+    "superagent": "^8.0.0"
+  },
+  "scripts": {
+    "start": "node nfc.mjs"
+  }
+}

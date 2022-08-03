@@ -73,3 +73,10 @@ services:
       io.balena.features.supervisor-api: 1
     environment:
       SET_HOSTNAME: balena
+
+  nfc:
+    build: ./plugins/nfc
+    restart: on-failure
+    network_mode: host
+    privileged: true
+    

@@ -1,0 +1,8 @@
+Looks for NFC tags on an attached reader (expecting text like `spotify:playlist:{playlist_id}`) and plays them.
+
+Expects the environment to contain:
+
+SPOTIFY_CLIENT_ID=5a...b2
+SPOTIFY_CLIENT_SECRET=bc52...57e
+SPOTIFY_REFRESH_TOKEN=AQA...WYU
+
