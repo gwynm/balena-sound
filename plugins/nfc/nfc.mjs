@@ -37,10 +37,10 @@ if (process.env.SPOTIFY_CLIENT_ID === undefined) {
   throw new Error('SPOTIFY_CLIENT_ID is not defined; terminating. See README for required env vars.');
 }
 
-console.log('NFC service starting up; will terminate in 60s. Client id is ',process.env.SPOTIFY_CLIENT_ID);
+console.log('NFC service starting up. Client id is ',process.env.SPOTIFY_CLIENT_ID);
 await new Promise(resolve => setTimeout(resolve, 10000));
 await startPlayingOnDevice({ device_name: 'balena', context_uri: 'spotify:playlist:3mp80ZZefLobVNMUpC4t9M' });
 await new Promise(resolve => setTimeout(resolve, 10000));
 await startPlayingOnDevice({ device_name: 'balena', context_uri: 'spotify:playlist:7fNYpyACsc9fURuxtfTSWq' });
-await new Promise(resolve => setTimeout(resolve, 60000));
+await new Promise(resolve => setTimeout(resolve, 6000000000000));
 console.log('Terminating');

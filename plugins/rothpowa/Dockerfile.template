@@ -1,0 +1,10 @@
+FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine
+
+## this provides ir-ctl
+RUN install_packages v4l-utils
+
+WORKDIR /usr/src
+
+COPY * ./
+
+CMD [ "/bin/bash", "/usr/src/rothpowa.sh" ]

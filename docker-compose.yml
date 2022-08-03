@@ -48,11 +48,11 @@ services:
     network_mode: host
     privileged: true
 
-  # rothpowa:
-  #   build: ./plugins/rothpowa
-  #   restart: on-failure
-  #   network_mode: host
-  #   privileged: true
+  rothpowa:
+    build: ./plugins/rothpowa
+    restart: on-failure
+    network_mode: host
+    privileged: true
 
   # audition:
   #   build: ./plugins/audition

@@ -1,0 +1,9 @@
+Prevent Roth Oli POWA-5 speakers from turning themselves off by sending them remote-control volume-up volume-down commands at intervals. Yes, really.
+
+## Hardware
+
+Wire up an IR LED via something like https://www.instructables.com/Creating-a-Raspberry-Pi-Universal-Remote-With-LIRC/ .
+
+## Config
+
+In Balena's Device Configuration, set `device dt overlays` to `"vc4-kms-v3d","gpio-ir,gpio_pin=23","gpio-ir-tx,gpio_pin=22"`
