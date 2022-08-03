@@ -30,6 +30,6 @@ async function getDeviceId({ auth_token, device_name }) {
 
 // await startPlayingOnDevice({ device_name: 'balena', context_uri: 'spotify:playlist:3mp80ZZefLobVNMUpC4t9M' });
 
-console.log('Hello world; will terminate in 60s');
+console.log('Hello world; will terminate in 60s. Client id is ' + process.env.SPOTIFY_CLIENT_ID);
 await new Promise(resolve => setTimeout(resolve, 60000));
 console.log('Terminating');
