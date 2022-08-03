@@ -5,4 +5,9 @@ Expects the environment to contain:
 SPOTIFY_CLIENT_ID=5a...b2
 SPOTIFY_CLIENT_SECRET=bc52...57e
 SPOTIFY_REFRESH_TOKEN=AQA...WYU
+SPOTIFY_USERNAME=
+SPOTIFY_PASSWORD=
+
+We need the spotify user/pass so that the spotify plugin can auth directly. Else it has to wait for zeroconf auth from the phone, 
+which means this won't work until after the first time you play via Spotify Connect from your phone.
 

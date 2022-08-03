@@ -25,15 +25,22 @@ async function getDeviceId({ auth_token, device_name }) {
   const res = await superagent.get('https://api.spotify.com/v1/me/player/devices')
     .set('Authorization', `Bearer ${auth_token}`);
   const device = res.body.devices.find(device => device.name.includes(device_name));
-  return device.id;
+  try {
+    return device.id;
+  } catch (e) {
+    console.error(`No device found with name ${device_name}. Devices found:`,res.body);
+    throw new Error(`No device found with name ${device_name}`);
+  }
 }
 
-// await startPlayingOnDevice({ device_name: 'balena', context_uri: 'spotify:playlist:3mp80ZZefLobVNMUpC4t9M' });
+if (process.env.SPOTIFY_CLIENT_ID === undefined) {
+  throw new Error('SPOTIFY_CLIENT_ID is not defined; terminating. See README for required env vars.');
+}
 
-console.log('Hello world; will terminate in 60s. Client id is ' + process.env.SPOTIFY_CLIENT_ID);
-// await new Promise(resolve => setTimeout(resolve, 10000));
-// await startPlayingOnDevice({ device_name: 'balena', context_uri: 'spotify:playlist:3mp80ZZefLobVNMUpC4t9M' });
-// await new Promise(resolve => setTimeout(resolve, 10000));
-// await startPlayingOnDevice({ device_name: 'balena', context_uri: 'spotify:playlist:7fNYpyACsc9fURuxtfTSWq' });
+console.log('NFC service starting up; will terminate in 60s. Client id is ',process.env.SPOTIFY_CLIENT_ID);
+await new Promise(resolve => setTimeout(resolve, 10000));
+await startPlayingOnDevice({ device_name: 'balena', context_uri: 'spotify:playlist:3mp80ZZefLobVNMUpC4t9M' });
+await new Promise(resolve => setTimeout(resolve, 10000));
+await startPlayingOnDevice({ device_name: 'balena', context_uri: 'spotify:playlist:7fNYpyACsc9fURuxtfTSWq' });
 await new Promise(resolve => setTimeout(resolve, 60000));
 console.log('Terminating');
