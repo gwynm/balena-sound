@@ -1,2 +1,0 @@
-device.name = "PN532 over I2C"
-device.connstring = "pn532_i2c:/dev/i2c-1"

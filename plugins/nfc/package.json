@@ -5,9 +5,10 @@
   "author": "Gwyn Morfey <mail@gwynmorfey.com>",
   "license": "MIT",
   "dependencies": {
+    "key-file-storage": "^2.2.10",
     "superagent": "^8.0.0"
   },
   "scripts": {
-    "start": "node nfc.mjs"
+    "start": "node index.mjs"
   }
 }

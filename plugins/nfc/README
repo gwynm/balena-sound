@@ -1,6 +1,5 @@
 Looks for NFC tags on an attached reader and plays corresponding spotify context uris.
 
-
 ## In detail
 
 If the currently playing context is Underoath's album "Erase Me" (https://open.spotify.com/album/7431Bc80pipMjt6v3qm0UL ; context-uri  spotify:album:7431Bc80pipMjt6v3qm0U)

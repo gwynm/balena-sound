@@ -2,6 +2,7 @@ version: '2'
 
 volumes:
   spotifycache:
+  nfcdata:
 
 services:
 
@@ -47,6 +48,8 @@ services:
     restart: on-failure
     network_mode: host
     privileged: true
+    volumes:
+      - 'nfcdata:/data'
 
   # nfc-python:
   #   build: ./plugins/nfc-python
