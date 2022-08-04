@@ -42,5 +42,5 @@ await new Promise(resolve => setTimeout(resolve, 10000));
 await startPlayingOnDevice({ device_name: 'balena', context_uri: 'spotify:playlist:3mp80ZZefLobVNMUpC4t9M' });
 await new Promise(resolve => setTimeout(resolve, 10000));
 await startPlayingOnDevice({ device_name: 'balena', context_uri: 'spotify:playlist:7fNYpyACsc9fURuxtfTSWq' });
-await new Promise(resolve => setTimeout(resolve, 6000000000000));
+await new Promise(resolve => setTimeout(resolve, 600000000));
 console.log('Terminating');

@@ -8,39 +8,39 @@ services:
   # Core services
   # -- Required for a fully featured installation of balenaSound
   # -- Mutiroom services can be removed if not using multiroom mode
-  audio:
-    build: ./core/audio
-    privileged: true
-    labels:
-      io.balena.features.dbus: 1
-    ports:
-      - 4317:4317
+  # audio:
+  #   build: ./core/audio
+  #   privileged: true
+  #   labels:
+  #     io.balena.features.dbus: 1
+  #   ports:
+  #     - 4317:4317
 
-  sound-supervisor:
-    build: 
-      context: .
-      dockerfile: ./core/sound-supervisor/Dockerfile.template
-    network_mode: host
-    labels:
-      io.balena.features.balena-api: '1'
-      io.balena.features.supervisor-api: 1
+  # sound-supervisor:
+  #   build: 
+  #     context: .
+  #     dockerfile: ./core/sound-supervisor/Dockerfile.template
+  #   network_mode: host
+  #   labels:
+  #     io.balena.features.balena-api: '1'
+  #     io.balena.features.supervisor-api: 1
 
-  spotify:
-    build: ./plugins/spotify
-    restart: on-failure
-    privileged: true
-    network_mode: host
-    volumes:
-      - spotifycache:/var/cache/raspotify
+  # spotify:
+  #   build: ./plugins/spotify
+  #   restart: on-failure
+  #   privileged: true
+  #   network_mode: host
+  #   volumes:
+  #     - spotifycache:/var/cache/raspotify
 
-  # https://github.com/balenablocks/hostname
-  hostname:
-    build: ./core/hostname
-    restart: no
-    labels:
-      io.balena.features.supervisor-api: 1
-    environment:
-      SET_HOSTNAME: balena
+  # # https://github.com/balenablocks/hostname
+  # hostname:
+  #   build: ./core/hostname
+  #   restart: no
+  #   labels:
+  #     io.balena.features.supervisor-api: 1
+  #   environment:
+  #     SET_HOSTNAME: balena
 
   nfc:
     build: ./plugins/nfc
@@ -48,11 +48,18 @@ services:
     network_mode: host
     privileged: true
 
-  rothpowa:
-    build: ./plugins/rothpowa
-    restart: on-failure
-    network_mode: host
-    privileged: true
+  # nfc-python:
+  #   build: ./plugins/nfc-python
+  #   restart: on-failure
+  #   network_mode: host
+  #   privileged: true
+    
+
+  # rothpowa:
+  #   build: ./plugins/rothpowa
+  #   restart: on-failure
+  #   network_mode: host
+  #   privileged: true
 
   # audition:
   #   build: ./plugins/audition

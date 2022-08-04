@@ -1,4 +1,27 @@
-Looks for NFC tags on an attached reader (expecting text like `spotify:playlist:{playlist_id}`) and plays them.
+Looks for NFC tags on an attached reader and plays corresponding spotify context uris.
+
+
+## In detail
+
+If the currently playing context is Underoath's album "Erase Me" (https://open.spotify.com/album/7431Bc80pipMjt6v3qm0UL ; context-uri  spotify:album:7431Bc80pipMjt6v3qm0U)
+
+  * Delete the context-uri associated with this tag ID
+
+  * Begin playing Nihls Frahm's album "Empty".
+
+Else if the tag ID is registered with a context-uri in the internal database:
+  
+  * Immediately begin playing the corresponding context-uri
+
+Else
+ 
+  * Associate the currently-playing spotify context uri (album, artist, or playlist), if any, to the tag. 
+  
+Tag data other than ID is never read, and nothing is ever written to the tag itself.
+
+## Setup
+
+### Environment
 
 Expects the environment to contain:
 
@@ -10,4 +33,24 @@ SPOTIFY_PASSWORD=
 
 We need the spotify user/pass so that the spotify plugin can auth directly. Else it has to wait for zeroconf auth from the phone, 
 which means this won't work until after the first time you play via Spotify Connect from your phone.
+
+### Hardware
+
+Expects a "PN532 NFC HAT" from Waveshare (https://www.waveshare.com/wiki/PN532_NFC_HAT).
+
+Jumpers:
+  * Set L0 to H
+  * Set L1 to L
+  * Connect RSTPDN to D20
+  * Connect INT0 to D16
+
+DIP switches:
+  * SCK: Off
+  * MISO: Off
+  * MOSI: Off
+  * NSS: Off
+  * SCL: On
+  * SDA: On
+  * RX: Off
+  * TX: Off
 

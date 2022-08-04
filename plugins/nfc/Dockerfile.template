@@ -1,9 +1,18 @@
-FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine-node:16
+FROM balenalib/%%BALENA_MACHINE_NAME%%-debian-python:3-build
 
-WORKDIR /usr/src
+# RUN install_packages libnfc-bin libnfc-dev libnfc-examples libnfc6 
+RUN install_packages nodejs npm
 
-COPY * ./
+RUN pip install RPi.GPIO spidev serial
+
+WORKDIR /usr/app
+
+COPY ./ ./
+
+# RUN ["cat","libnfc.conf.addition",">> /etc/nfc/libnfc.conf"]
 
 RUN npm install
 
-CMD [ "npm", "start" ]
+CMD ["/bin/bash"]
+
+# CMD [ "npm", "start" ]
