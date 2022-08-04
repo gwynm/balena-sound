@@ -5,7 +5,7 @@
   "author": "Gwyn Morfey <mail@gwynmorfey.com>",
   "license": "MIT",
   "dependencies": {
-    "key-file-storage": "^2.2.10",
+    "data-store": "^4.0.3",
     "superagent": "^8.0.0"
   },
   "scripts": {

@@ -1,5 +1,5 @@
 import { spawn } from 'child_process';
-import { handleTagRead } from './logic';
+import { handleTagRead } from './logic.mjs';
 
 if (process.env.SPOTIFY_CLIENT_ID === undefined) {
   throw new Error('SPOTIFY_CLIENT_ID is not defined; terminating. See README for required env vars.');
