@@ -54,3 +54,7 @@ DIP switches:
   * RX: Off
   * TX: Off
 
+
+## Weirdness
+
+Yep, it uses both node and python, because I'd already written the API code in Node when I realised that NFC is much better supported in Python.

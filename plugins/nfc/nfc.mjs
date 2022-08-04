@@ -1,4 +1,5 @@
 import superagent from 'superagent';
+import { spawn } from 'child_process';
 
 async function startPlayingOnDevice({device_name, context_uri}) {
   const auth_token = await getAuthToken();
@@ -38,9 +39,26 @@ if (process.env.SPOTIFY_CLIENT_ID === undefined) {
 }
 
 console.log('NFC service starting up. Client id is ',process.env.SPOTIFY_CLIENT_ID);
-await new Promise(resolve => setTimeout(resolve, 10000));
-await startPlayingOnDevice({ device_name: 'balena', context_uri: 'spotify:playlist:3mp80ZZefLobVNMUpC4t9M' });
-await new Promise(resolve => setTimeout(resolve, 10000));
-await startPlayingOnDevice({ device_name: 'balena', context_uri: 'spotify:playlist:7fNYpyACsc9fURuxtfTSWq' });
+
+await new Promise(resolve => setTimeout(resolve, 5000));
+
+console.log('Starting tag reader');
+
+var tag_reader = spawn('stdbuf',['-o0','-e0','./scan_for_tags.py'])
+
+tag_reader.stdout.on('data', (data) => {
+  console.log('Tag reader says utf8',data.toString('utf8'));
+});
+
+tag_reader.on('close', (code) => {
+  throw new Error(`Tag reader exited with code ${code}`);
+});
+
+// await new Promise(resolve => setTimeout(resolve, 10000));
+// await startPlayingOnDevice({ device_name: 'balena', context_uri: 'spotify:playlist:3mp80ZZefLobVNMUpC4t9M' });
+// await new Promise(resolve => setTimeout(resolve, 10000));
+// await startPlayingOnDevice({ device_name: 'balena', context_uri: 'spotify:playlist:7fNYpyACsc9fURuxtfTSWq' });
+
+
 await new Promise(resolve => setTimeout(resolve, 600000000));
 console.log('Terminating');
