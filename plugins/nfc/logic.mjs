@@ -3,7 +3,7 @@ import { startPlayingOnDevice, getCurrentContext } from './spotify.mjs';
 import dataStore from 'data-store';
 const store = dataStore({ path:'/data/store.json' });
 
-const DEVICE_NAME = 'Balena';
+const DEVICE_NAME = 'balenaSound';
 const ERASE_CONTEXT = 'spotify:album:7431Bc80pipMjt6v3qm0U';
 const ERASE_SUCCESS_CONTEXT = 'spotify:album:5XD78Fc6jfSfFYgwynseoI';
 
