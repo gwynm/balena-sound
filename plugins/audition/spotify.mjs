@@ -35,7 +35,7 @@ export default function SpotifyAPI(params) {
   }
 
   async function getPlaylistName(playlist_uri) {
-    const playlist_id = context_uri.split(':')[2];
+    const playlist_id = playlist_uri.split(':')[2];
     const res = await superagent.get(`https://api.spotify.com/v1/playlists/${playlist_id}`)
       .set('Authorization', `Bearer ${await getAccessToken()}`);
     return res.body.name;
@@ -45,15 +45,15 @@ export default function SpotifyAPI(params) {
     console.log('Loving item', item_uri);
     return superagent.put(`https://api.spotify.com/v1/me/tracks`)
       .set('Authorization', `Bearer ${await getAccessToken()}`)
-      .send({ uris: [item_uri.split(":")[2]] });
+      .send({ ids: [item_uri.split(":")[2]] });
   }
 
   async function removeItemFromPlaylist({ item_uri, context_uri }) {
     console.log('Removing item', item_uri, 'from playlist', context_uri);
     const playlist_id = context_uri.split(':')[2];
-    return superagent.delete(`https://api.spotify.com/v1/me/playlists/${playlist_id}/tracks`)
+    return superagent.delete(`https://api.spotify.com/v1/playlists/${playlist_id}/tracks`)
       .set('Authorization', `Bearer ${await getAccessToken()}`)
-      .query({ tracks: [item_uri] });
+      .send({ tracks: [{uri: item_uri}] });
   }
     
   async function getDeviceId({ device_name }) {
@@ -76,7 +76,6 @@ export default function SpotifyAPI(params) {
   }
 
   async function refreshAccessToken() {
-    console.log('Refreshing access token...');
     const ACCESS_TOKEN_EXPIRY_FUDGE = 1000 * 60;
 
     const res = await superagent.post('https://accounts.spotify.com/api/token')
@@ -88,8 +87,7 @@ export default function SpotifyAPI(params) {
         refresh_token: process.env.SPOTIFY_REFRESH_TOKEN
       });
     access_token = res.body.access_token;
-    access_token_expires_at = res.body.expires_in + Date.now() - ACCESS_TOKEN_EXPIRY_FUDGE;
-    console.log('Access token:', access_token);
+    access_token_expires_at = (res.body.expires_in * 1000) + Date.now() - ACCESS_TOKEN_EXPIRY_FUDGE;
   }
   
   return {
