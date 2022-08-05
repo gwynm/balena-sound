@@ -93,5 +93,3 @@ services:
     build: ./plugins/audition
     restart: on-failure
     network_mode: host
-    volumes:
-      - 'nfcdata:/data'
