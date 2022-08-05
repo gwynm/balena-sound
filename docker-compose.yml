@@ -3,7 +3,7 @@ version: '2'
 volumes:
   spotifycache:
   nfcdata: 
-  
+
 services:
 
   # Core services
@@ -88,3 +88,10 @@ services:
     restart: on-failure
     network_mode: host
     privileged: true
+
+  audition:
+    build: ./plugins/audition
+    restart: on-failure
+    network_mode: host
+    volumes:
+      - 'nfcdata:/data'

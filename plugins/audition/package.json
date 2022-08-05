@@ -1,11 +1,10 @@
 {
-  "name": "nfc",
+  "name": "audition",
   "version": "0.0.1",
-  "main": "index.mjs",
+  "main": "audition.mjs",
   "author": "Gwyn Morfey <mail@gwynmorfey.com>",
   "license": "MIT",
   "dependencies": {
-    "data-store": "^4.0.3",
     "superagent": "^8.0.0"
   },
   "scripts": {

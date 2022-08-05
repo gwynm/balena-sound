@@ -1,0 +1,67 @@
+Continuously improve your playlists without manual work or AI.
+
+## Setup
+
+Expects the environment to contain:
+
+SPOTIFY_CLIENT_ID=5a...b2
+SPOTIFY_CLIENT_SECRET=bc52...57e
+SPOTIFY_REFRESH_TOKEN=AQA...WYU
+
+## Action
+
+Polls spotify every 5s to see what you're playing.
+
+* If you play the same track twice in a row, mark it as 'Loved'.
+
+* If you are playing a playlist that contains "(audition)" in the name,
+
+* AND you skip a track,
+
+* Delete it from the playlist.
+
+## Skip detection in detail
+
+We poll every five seconds. On poll, if:
+
+* We are still playing, and
+* We are playing from a playlist, and 
+* That playlist's name contains "(audition)", and 
+* The playback context (playlist id) has not changed since last poll, and
+* The track we are playing has changed since last poll (A->B), and
+* We were playing A for more than 5 seconds, and
+* We were playing A for less than 90 seconds
+* Then A was skipped.
+
+The lower and upper thresholds are there to allow you to skip tracks that you like but which aren't right for now. Note there's some fuzz in them due to the 5s polling.
+
+If the poll returns 'paused' or 'not playing' then we delete the 'previous poll' data; pausing a track or ceasing playback will never result in action, even when you start playing again. (Ie you can switch track without counting as a 'skip' by pausing, waiting at least one poll interval, and then switching)
+
+## Replay detection in detail
+
+On poll, if:
+
+* We are still playing, and
+* The track we are playing has not changed since last poll, and
+* Our time position in the track is earlier than it was in the last poll
+* Then this track was replayed.
+
+(Yes, skipping backwards at all will also trigger this, deliberately).
+
+## Workflow
+
+Dump a lot of 'hey this might be good but I don't know' (perhaps from Spotify's suggestions) into  playlists, and label them with '(audition)'. Play them on shuffle mode. Over time, the dross will be removed. 
+
+Every now and then, skim through your Loved tracks and add them to other relevant playlists, and as a direction to explore.
+
+## Auth
+
+We use the spotify refresh token (and therefore user id) in the environment. So, while other LAN users can use zeroconf to play back to balenaSound (potentially from their own private playlists), only playlists and tracks owned by the 'primary' user are actually affected by Audition. This is either a feature or a bug. 
+
+## Future directions
+
+Prevent a track that has been removed from being re-added (perhaps to _any_ playlist). Else, spotify keeps suggesting the same stuff.
+
+Maybe just add physical 'this is great' and 'this sucks' buttons to the Pi?
+
+The polling is incredibly wasteful, but Spotify doesn't have webhooks, so..
